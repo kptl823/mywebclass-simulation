@@ -17,5 +17,10 @@ Khusbhu 	Kp823@njit.edu	EMail	Project Manager:
 
 
  
-
+Oversee the entire project from conception to completion
+Work closely with the Web Developer to ensure that the website meets the requirements of the project and is free of defects
+Coordinate team formation
+Ensure that the project stays on schedule and within budget
+Develop and implement testing strategies and processes.
+Ensure that the website meets all legal and regulatory requirements
 
