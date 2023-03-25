@@ -34,7 +34,7 @@ Finally, use Playwright to create powerful and reliable automated tests for web 
 
 ## Link to Project Deployments
 
-- GitHub Pages: https://njit-wis.github.io/mywebclass-simulation/
+- GitHub Pages: https://github.com/kptl823/mywebclass-simulation.git
 - Oracle Cloud: http://www.mywebclass.org
 
 ## Instructor Project Videos - Will Be Updated as They Are Recorded
@@ -64,8 +64,8 @@ Finally, use Playwright to create powerful and reliable automated tests for web 
 
 # ADD YOUR PROJECT LINKS BELOW THIS 
 
-[Githubpages live site deployment] (https://kptl823.github.io/mywebclass-simulation/)
+[Github pages live site deployment] (https://kptl823.github.io/mywebclass-simulation/)
 
 [Installing the Project on the Developer's Computer] (https://github.com/kptl823/mywebclass-simulation/wiki/Installing-the-project-on-the-developer's-computer)
 
-[set up the development server] (https://github.com/kptl823/mywebclass-simulation/wiki/Set-up-the-development-server)
+[set up the development server Link] (https://github.com/kptl823/mywebclass-simulation/wiki/Set-up-the-development-server)
