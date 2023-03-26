@@ -18,7 +18,7 @@ test.describe('MyWebClass.org internationalization', () => {
     await page.goto('http://localhost:3000')
 
     const langAttribute = await page.getAttribute('html', 'lang')
-    expect(langAttribute).toBe('en', 'The lang attribute of the HTML tag is not set to "en".')
+    expect(langAttribute).toBe('en', 'The lang attribute of the tag is not set to "en".')
 
      })
 })
