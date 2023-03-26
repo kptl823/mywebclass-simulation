@@ -8,6 +8,7 @@ import allPage from './allPages'
 import contentPage from './contentPage'
 
 document.addEventListener('DOMContentLoaded', () => {
+setLanguage()
   allPage.initialize()
   contentPage.initialize()
 })
