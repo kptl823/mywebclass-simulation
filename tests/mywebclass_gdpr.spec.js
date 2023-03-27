@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const { test, expect } = require('@playwright/test')
 // Helper function to accept the privacy policy
 async function acceptPrivacyPolicy (page) {
