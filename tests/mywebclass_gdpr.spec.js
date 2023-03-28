@@ -1,22 +1,36 @@
-// Check if user has given consent for cookies
-function checkConsent() {
-  return localStorage.getItem('cookieConsent');
+const { test, expect } = require('@playwright/test')
+
+// Helper function to accept the privacy policy
+async function acceptPrivacyPolicy (page) {
+  const agreeButton = await page.$('#agreeButton')
+  if (agreeButton) {
+    await agreeButton.click()
+    await page.waitForTimeout(1000) // Add a small delay to give time for the modal to close
+  }
 }
 
-// Set consent for cookies
-function setConsent() {
-  localStorage.setItem('cookieConsent', 'true');
-}
+test('MyWebClass.org is Google Analytics and GDPR compliant', async ({ page }) => {
+// Check for explicit user consent
+  await page.goto('http://localhost:3000/')
+  await acceptPrivacyPolicy(page) // Add this line
+  const cookieBanner = await page.$('text=Privacy and Cookies Policy')
+  expect(cookieBanner).toBeTruthy()
 
-// Show cookie consent banner if consent has not been given
-if (!checkConsent()) {
-  const banner = document.createElement('div');
-  banner.innerHTML = `
-    <div class="cookie-banner">
-      <p>This website uses cookies to improve your experience. Click "Accept" to consent to the use of cookies.</p>
-      <button class="cookie-accept" onclick="setConsent()">Accept</button>
-    </div>
-  `;
-  document.body.appendChild(banner);
-}
 
+  // Check for GDPR compliance with a privacy policy
+  await page.waitForSelector('text=Privacy and Cookies Policy') // Add this line to wait for the element
+  const privacyPolicyLink = await page.$('text=Privacy and Cookies Policy')
+  await privacyPolicyLink.click()
+
+  const policySections = await page.$$eval('h2', headings => headings.map(h => h.textContent))
+
+  expect(policySections).toContain('Accessibility Policy')
+  expect(policySections).toContain('Data retention and security')
+  expect(policySections).toContain('Your rights')
+
+
+  const secureConnection = page.url().startsWith('https://')
+  if (!page.url().startsWith('http://localhost')) {
+    expect(secureConnection).toBeTruthy()
+  }
+})
