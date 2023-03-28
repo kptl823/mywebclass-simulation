@@ -1,7 +1,7 @@
-import { test, expect } from '@playwright/test'
+ import { test, expect } from '@playwright/test'
 
 const pages = [
-  { url: 'http://localhost:3000/content.html', title: 'MyWebClass.org' }
+  { url: 'http://localhost:3000/', title: 'MyWebClass.org' }
 ]
 
 // Helper function to accept the privacy policy
