@@ -24,10 +24,14 @@ test('MyWebClass.org is Google Analytics and GDPR compliant', async ({ page }) =
 
   const policySections = await page.$$eval('h2', headings => headings.map(h => h.textContent))
 
+  expect(policySections).toContain('Information we collect')
+  expect(policySections).toContain('How we use your information')
+  expect(policySections).toContain('Sharing of Information')
+  expect(policySections).toContain('Security Measures')
   expect(policySections).toContain('Accessibility Policy')
   expect(policySections).toContain('Data retention and security')
   expect(policySections).toContain('Your rights')
-
+  expect(policySections).toContain('Changes to This Policy')
 
   const secureConnection = page.url().startsWith('https://')
   if (!page.url().startsWith('http://localhost')) {
