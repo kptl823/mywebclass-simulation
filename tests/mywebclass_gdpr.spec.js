@@ -1,35 +1,4 @@
-// ga.js - Google Analytics tracking code
-
-function loadGA() {
-  // Load Google Analytics script
-  var gaScript = document.createElement('script');
-  gaScript.setAttribute('async', '');
-  gaScript.setAttribute('src', 'https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID');
-  document.head.appendChild(gaScript);
-
-  // Initialize Google Analytics
-  window.dataLayer = window.dataLayer || [];
-  function gtag() { dataLayer.push(arguments); }
-  gtag('js', new Date());
-  gtag('config', 'GA_MEASUREMENT_ID', {
-    'anonymize_ip': true, // Enable IP anonymization
-    'cookie_expires': 31536000, // Set data retention period to 1 year
-    'cookie_prefix': 'ga', // Customize cookie name prefix
-    'allow_google_signals': false, // Disable advertising features
-    'send_page_view': false // Manually trigger pageview events
-  });
-}
-
-function initGA() {
-  // Check if user has already given consent
-  var consentCookie = getCookie('ga_consent');
-  if (consentCookie == 'true') {
-    loadGA();
-  } else {
-    // Show confirmation modal for user consent
-    showConsentModal();
-  }
-}
+// gdpr.js - GDPR compliance code
 
 function getCookie(name) {
   // Helper function to get cookie value by name
@@ -51,21 +20,44 @@ function setCookie(name, value, days) {
   document.cookie = name + '=' + value + expires + '; path=/';
 }
 
+function deleteCookies() {
+  // Delete all cookies with domain and path
+  var cookies = document.cookie.split(';');
+  for (var i = 0; i < cookies.length; i++) {
+    var cookie = cookies[i];
+    while (cookie.charAt(0) == ' ') {
+      cookie = cookie.substring(1);
+    }
+    if (cookie.indexOf('=') != -1) {
+      var name = cookie.split('=')[0];
+      document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/';
+    }
+  }
+}
+
 function showConsentModal() {
   // Show confirmation modal for user consent
   // ...
   // Handle user clicks on "Accept" or "Decline" buttons
   var acceptButton = document.getElementById('accept-button');
   acceptButton.addEventListener('click', function() {
-    setCookie('ga_consent', 'true', 365); // Set cookie for 1 year
-    loadGA();
+    setCookie('gdpr_consent', 'true', 365); // Set cookie for 1 year
     // Hide confirmation modal
   });
   var declineButton = document.getElementById('decline-button');
   declineButton.addEventListener('click', function() {
-    setCookie('ga_consent', 'false', 365); // Set cookie for 1 year
+    deleteCookies(); // Delete all cookies
     // Hide confirmation modal
   });
 }
 
-initGA();
+function initGDPR() {
+  // Check if user has already given consent
+  var consentCookie = getCookie('gdpr_consent');
+  if (consentCookie != 'true') {
+    // Show confirmation modal for user consent
+    showConsentModal();
+  }
+}
+
+initGDPR();
